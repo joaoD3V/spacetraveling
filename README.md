@@ -16,7 +16,7 @@
 - React
 - Next
 - SASS
-- Stripe
+- Prismic
 
 ## 🎨 Layout:
 
