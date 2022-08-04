@@ -49,11 +49,7 @@ export default function Home({ postsPagination }: HomeProps) {
               subtitle: post.data.subtitle,
               author: post.data.author,
             },
-            first_publication_date: format(
-              new Date(post.first_publication_date),
-              'dd LLL yyyy',
-              { locale: ptBR }
-            ),
+            first_publication_date: post.first_publication_date,
           };
         });
 
@@ -76,9 +72,14 @@ export default function Home({ postsPagination }: HomeProps) {
             <a>
               <strong>{post.data.title}</strong>
               <p>{post.data.subtitle}</p>
-              <div>
+              <div className={common.postInfo}>
                 <time>
-                  <FiCalendar size={20} /> {post.first_publication_date}
+                  <FiCalendar size={20} />{' '}
+                  {format(
+                    new Date(post.first_publication_date),
+                    'dd LLL yyyy',
+                    { locale: ptBR }
+                  )}
                 </time>
                 <span>
                   <FiUser size={20} /> {post.data.author}
@@ -116,11 +117,7 @@ export const getStaticProps: GetStaticProps = async () => {
         subtitle: post.data.subtitle,
         author: post.data.author,
       },
-      first_publication_date: format(
-        new Date(post.first_publication_date),
-        'dd LLL yyyy',
-        { locale: ptBR }
-      ),
+      first_publication_date: post.first_publication_date,
     };
   });
 
@@ -133,5 +130,6 @@ export const getStaticProps: GetStaticProps = async () => {
     props: {
       postsPagination,
     },
+    revalidate: 60 * 60 * 24,
   };
 };
